@@ -1,13 +1,21 @@
 import { StrictMode } from 'react'
-import { HashRouter } from 'react-router-dom'
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
+// @ts-ignore
+import '@fontsource/outfit'
+import MainPage from './pages/mainPage/MainPage.tsx'
+import GamePage from './pages/gamePage/GamePage.tsx'
+
+const router = createHashRouter(
+    [
+        { path: '/', element: <MainPage /> },
+        { path: '/game', element: <GamePage /> },
+    ],
+)
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <HashRouter>
-          <App />
-      </HashRouter>
+      <RouterProvider router={router} />
   </StrictMode>,
 )
