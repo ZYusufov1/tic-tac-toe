@@ -3,7 +3,7 @@ import { createHashRouter, RouterProvider } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 // @ts-ignore
-import '@fontsource/outfit'
+// import '@fontsource/outfit'
 import MainPage from './pages/mainPage/MainPage.tsx'
 import GamePage from './pages/gamePage/GamePage.tsx'
 

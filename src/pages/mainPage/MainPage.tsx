@@ -6,15 +6,20 @@ import XIcon from './../../images/x.svg?react'
 import OIcon from './../../images/o.svg?react'
 import { useState } from 'react'
 import classNames from 'classnames'
+import GroupIcons from '../../components/groupIcons/GroupIcons.tsx'
+import { useNavigate } from 'react-router-dom'
 
 const MainPage = () => {
-    const [way, setWay] = useState('x')
-
+    const [way, setWay] = useState('X')
+    const navigate = useNavigate()    
+    
+    const handleNavigation = (mode: string, player: string) => {
+        navigate(`/game?mode=${mode}&player=${player}`)
+    }
+    
     return (
         <div className={'mainPage'}>
-            <div className={'groupIcons'}>
-                <XIcon /> <OIcon />
-            </div>
+            <GroupIcons />
 
             <div className={'blockChoose'}>
                 <div className={'title'}>
@@ -24,18 +29,18 @@ const MainPage = () => {
                 <div className={'buttonsChoose'}>
                     <button
                         className={classNames('button' , {
-                            'buttonChose': way == 'x'
+                            'buttonChose': way == 'X'
                         })}
-                        onClick={() => setWay('x')}
+                        onClick={() => setWay('X')}
                     >
                         <XIcon />
                     </button>
 
                     <button
                         className={classNames('button' , {
-                            'buttonChose': way == 'o'
+                            'buttonChose': way == 'O'
                         })}
-                        onClick={() => setWay('o')}
+                        onClick={() => setWay('O')}
                     >
                         <OIcon />
                     </button>
@@ -50,11 +55,13 @@ const MainPage = () => {
 
                 <button
                     className={classNames('buttonYellow', 'buttonText')}
+                    onClick={() => handleNavigation('PlayerVSCPU', way)}
                 >
                     NEW GAME (VS CPU)
                 </button>
                 <button
                     className={classNames('buttonLime', 'buttonText')}
+                    onClick={() => handleNavigation('PlayerVSPlayer', way)}
                 >
                     NEW GAME  (VS PLAYER)
                 </button>
