@@ -17,6 +17,7 @@ import OEmptyIcon from './../../images/oEmpty.svg?react'
 import ResetIcon from './../../images/reset.svg?react'
 import classNames from 'classnames'
 import { useSearchParams } from 'react-router-dom'
+import ResultRound from '../../components/resultRound/ResultRound.tsx'
 
 export type Player = 'X' | 'O' | null;
 
@@ -34,11 +35,14 @@ const GamePage = () => {
     const [midCount, setMidCount] = useState<number>(0)
     const [rightCount, setRightCount] = useState<number>(0)
     const [isXNext, setIsXNext] = useState<boolean>(true)
+    const [isShow, setIsShow] = useState<boolean>(false)
 
     const winner = calculateWinner(board)
 
     useEffect(() => {
         if (!winner) return
+
+        if (winner) setIsShow(true)
 
         if (winner === 'DRAW') {
             setMidCount((prev) => prev + 1)
@@ -90,6 +94,22 @@ const GamePage = () => {
 
     return (
         <div className="game">
+            <ResultRound
+                isOpen={isShow}
+                onClose={() => setIsShow(false)}
+                onReset={handleReset}
+                whoWins={
+                    winner == 'DRAW' ? winner :
+                        mode == 'PlayerVSCPU' ?
+                            (firstPlayer == winner ? 'you' : 'cpu') :
+                            (firstPlayer == winner ? 'first' : 'second')
+                }
+                winnersIcon={
+                    winner == 'DRAW' ? null :
+                        firstPlayer == winner ?  winner: getOpponent(player)
+                }
+            />
+
             <div className="board">
                 <GroupIcons />
 
@@ -115,7 +135,7 @@ const GamePage = () => {
                 ))}
 
                 <div className={classNames('count', 'leftCount')}>
-                    {player} (YOU)
+                    {player} {mode === 'PlayerVSCPU' ? '(YOU)' : '(Player 1)'}
                     <strong>{leftCount}</strong>
                 </div>
 

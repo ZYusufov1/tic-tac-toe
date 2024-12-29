@@ -52,13 +52,13 @@ const MainPage = () => {
             </div>
 
             <div className={'modeButtons'}>
-
                 <button
                     className={classNames('buttonYellow', 'buttonText')}
                     onClick={() => handleNavigation('PlayerVSCPU', way)}
                 >
                     NEW GAME (VS CPU)
                 </button>
+
                 <button
                     className={classNames('buttonLime', 'buttonText')}
                     onClick={() => handleNavigation('PlayerVSPlayer', way)}

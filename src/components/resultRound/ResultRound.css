@@ -1,0 +1,97 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 176px;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    background: #1F3641;
+}
+
+.title {
+    font-family: Outfit, serif;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+.result {
+    margin-top: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Outfit, serif;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 2.5px;
+}
+
+
+.icon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 24px;
+}
+
+.icon > svg {
+    width: 64px;
+    height: 64px;
+}
+
+.o {
+    color: #F2B137;
+}
+
+.x {
+    color: #31C3BD;
+}
+
+.draw {
+    color: #A8BFC9;
+    margin-bottom: 31px;
+}
+
+.groupButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px
+}
+
+.groupButtons > button {
+    padding: 15px 16px 17px 17px;
+    font-family: Outfit, serif;
+    color: #1A2A33;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+.grayButton {
+    background: #A8BFC9;
+    box-shadow: 0 -4px 0 0 #6B8997 inset;
+}
+
+.grayButton:hover {
+    background: #DBE8ED;
+}
+
+.yellowButton {
+    background: #F2B137;
+    box-shadow: 0 -4px 0 0 #CC8B13 inset;
+}
+
+.yellowButton:hover {
+    background: #FFC860;
+}
