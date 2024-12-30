@@ -91,3 +91,23 @@
 .rightCount {
     background: #F2B137;
 }
+
+@media (max-width: 768px) {
+    .game {
+        margin-top: 24px;
+    }
+
+    .reset {
+        width: 40px;
+        height: 40px;
+    }
+
+    .count {
+        font-size: 12px;
+    }
+
+    .count > strong {
+        line-height: 25px;
+        font-size: 20px;
+    }
+}

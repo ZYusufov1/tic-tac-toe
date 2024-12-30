@@ -80,32 +80,29 @@
     row-gap: 20px;
 }
 
-.buttonYellow {
+.buttonMode {
     border-radius: 10px;
     padding-top: 17px;
     padding-bottom: 25px;
     outline: none !important;
     border: none;
+}
+
+.yellow {
     background: #F2B137;
     box-shadow: 0 -8px 0 0 #CC8B13 inset;
 }
 
-.buttonYellow:hover {
+.yellow:hover {
     background: #FFC860;
 }
 
-.buttonLime {
-    border-radius: 10px;
-    padding-top: 17px;
-    padding-bottom: 25px;
-    outline: none !important;
-    border: none;
-    background: none;
+.lime {
     background: #31C3BD;
     box-shadow: 0 -8px 0 0 #118C87 inset;
 }
 
-.buttonLime:hover {
+.lime:hover {
     background: #65E9E4;
 }
 
@@ -116,4 +113,35 @@
     letter-spacing: 1px;
     font-weight: 700;
     color: #1A2A33;
+}
+
+@media (max-width: 768px) {
+    .mainPage {
+        margin-top: 120px;
+        row-gap: 32px;
+    }
+
+    .title {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .member {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .button {
+        padding: 11px 50px;
+    }
+
+    .buttonMode {
+        padding-top: 14px;
+        padding-bottom: 22px;
+    }
+
+    .buttonText {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }

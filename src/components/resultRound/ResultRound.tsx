@@ -28,12 +28,12 @@ const ResultMessage: FC<{ whoWins: string; winnersIcon?: 'X' | 'O' | null }> = (
     const message = messages[whoWins] || 'Something Wrong'
 
     return (
-        <div className="result">
+        <>
             {whoWins !== 'DRAW' ? (
                 <>
                     <div className="title">{message}</div>
                     <div
-                        className={classNames('icon', {
+                        className={classNames('result','icon', {
                             x: winnersIcon === 'X',
                             o: winnersIcon === 'O',
                         })}
@@ -45,7 +45,7 @@ const ResultMessage: FC<{ whoWins: string; winnersIcon?: 'X' | 'O' | null }> = (
             ) : (
                 <div className={classNames('result', 'draw')}>{message}</div>
             )}
-        </div>
+        </>
     )
 }
 
