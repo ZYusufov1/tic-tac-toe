@@ -1,4 +1,5 @@
 .square {
+    padding: 36px 38px 38px;
     width: 140px;
     height: 140px;
     cursor: pointer;
@@ -6,4 +7,17 @@
     outline: none !important;
     background: #1F3641;
     box-shadow: 0 -8px 0 0 #10212A inset;
+}
+
+@media (max-width: 768px) {
+    .square {
+        padding: 24px 28px 32px;
+        width: 96px;
+        height: 96px;
+    }
+
+    .square > svg {
+        width: 20px;
+        height: 20px;
+    }
 }

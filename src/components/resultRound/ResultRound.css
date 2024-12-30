@@ -57,6 +57,7 @@
 
 .draw {
     color: #A8BFC9;
+    margin-top: 22px;
     margin-bottom: 31px;
 }
 
@@ -94,4 +95,39 @@
 
 .yellowButton:hover {
     background: #FFC860;
+}
+
+
+@media (max-width: 768px) {
+    .content {
+        min-height: 138px;
+        padding-top: 40px;
+        padding-bottom: 48px;
+    }
+
+    .result {
+        font-size: 24px;
+        line-height: normal;
+        letter-spacing: 1.5px;
+    }
+
+    .draw {
+        margin-top: 21px;
+        margin-bottom: 24px;
+        font-size: 24px;
+        letter-spacing: 1.5px;
+    }
+
+    .groupButtons {
+        gap: 16px
+    }
+
+    .icon {
+        column-gap: 8px;
+    }
+
+    .icon > svg {
+        width: 30px;
+        height: 30px;
+    }
 }
