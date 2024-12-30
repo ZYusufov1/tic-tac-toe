@@ -6,7 +6,6 @@ import XIcon from './../../images/x.svg?react'
 import OIcon from './../../images/o.svg?react'
 import classNames from 'classnames'
 import { FC, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 interface ResultRoundProps {
     isOpen: boolean;
@@ -51,17 +50,14 @@ const ResultMessage: FC<{ whoWins: string; winnersIcon?: 'X' | 'O' | null }> = (
 
 const ResultRound: FC<ResultRoundProps> = ({ isOpen, onClose, onReset, whoWins, winnersIcon }) => {
     const [isShow, setIsShow] = useState(false)
-    const navigate = useNavigate()
 
     const handleQuit = () => {
         onClose()
-        navigate('/')
     }
 
     const handleReset = () => {
-        setIsShow(false)
-        onClose()
         onReset()
+        setIsShow(false)
     }
 
     return (
@@ -72,10 +68,19 @@ const ResultRound: FC<ResultRoundProps> = ({ isOpen, onClose, onReset, whoWins, 
                         <ResultMessage whoWins={whoWins} winnersIcon={winnersIcon} />
 
                         <div className="groupButtons">
-                            <button className="grayButton" onClick={handleQuit}>
+                            <button
+                                aria-label="Quit option"
+                                className="grayButton"
+                                onClick={handleQuit}
+                            >
                                 QUIT
                             </button>
-                            <button className="yellowButton" onClick={() => setIsShow(true)}>
+
+                            <button
+                                aria-label="Next round option"
+                                className="yellowButton"
+                                onClick={() => setIsShow(true)}
+                            >
                                 NEXT ROUND
                             </button>
                         </div>
@@ -83,11 +88,22 @@ const ResultRound: FC<ResultRoundProps> = ({ isOpen, onClose, onReset, whoWins, 
                 ) : (
                     <>
                         <div className={classNames('result', 'draw')}>RESTART GAME?</div>
+
                         <div className="groupButtons">
-                            <button className="grayButton" onClick={handleQuit}>
+                            <button
+
+                                aria-label="Cancel option"
+                                className="grayButton"
+                                onClick={handleQuit}
+                            >
                                 NO, CANCEL
                             </button>
-                            <button className="yellowButton" onClick={handleReset}>
+
+                            <button
+                                aria-label="Restart option"
+                                className="yellowButton"
+                                onClick={handleReset}
+                            >
                                 YES, RESTART
                             </button>
                         </div>

@@ -1,4 +1,4 @@
-import { Player } from '../gamePage/GamePage.tsx'
+import { Player } from '../../App.tsx'
 
 export const calculateWinner = (board: Player[]): 'X' | 'O' | 'DRAW' | null => {
     const lines: number[][] = [

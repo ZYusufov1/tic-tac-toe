@@ -3,7 +3,9 @@ import { calculateWinner } from '../utils/calculateWinner.ts'
 import './GamePage.css'
 import { calculateBestMove } from '../utils/calculateBestMove.ts'
 import GroupIcons from '../../components/groupIcons/GroupIcons.tsx'
+import ResultRound from '../../components/resultRound/ResultRound.tsx'
 import Square from '../../components/renderSquare/RenderSquare.tsx'
+import type { Player } from '../../App.tsx'
 
 // @ts-ignore
 import XIcon from './../../images/x.svg?react'
@@ -16,19 +18,17 @@ import OEmptyIcon from './../../images/oEmpty.svg?react'
 // @ts-ignore
 import ResetIcon from './../../images/reset.svg?react'
 import classNames from 'classnames'
-import { useSearchParams } from 'react-router-dom'
-import ResultRound from '../../components/resultRound/ResultRound.tsx'
-
-export type Player = 'X' | 'O' | null;
 
 const getOpponent = (player: Player): Player => (player === 'X' ? 'O' : 'X')
 
-const GamePage = () => {
-    const [searchParams] = useSearchParams()
-    const mode = searchParams.get('mode')
-    const firstPlayer: Player = searchParams.get('player') as Player
+interface GamePageProps {
+    mode: string,
+    stopGame: () => void,
+    player: Player
+}
 
-    const player: Player = firstPlayer || 'X'
+const GamePage = ({ mode, stopGame, player = 'X' }: GamePageProps) => {
+
     const [board, setBoard] = useState<Player[]>(Array(9).fill(null))
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
     const [leftCount, setLeftCount] = useState<number>(0)
@@ -47,21 +47,21 @@ const GamePage = () => {
         if (winner === 'DRAW') {
             setMidCount((prev) => prev + 1)
         } else {
-            const isLeftPlayer = winner === firstPlayer
+            const isLeftPlayer = winner === player
             if (isLeftPlayer) {
                 setLeftCount((prev) => prev + 1)
             } else {
                 setRightCount((prev) => prev + 1)
             }
         }
-    }, [winner, firstPlayer])
+    }, [winner, player])
 
     useEffect(() => {
         if (mode !== 'PlayerVSCPU' || winner) return
 
         const opponent = getOpponent(player)
 
-        if ((!isXNext && firstPlayer === 'X') || (isXNext && firstPlayer === 'O')) {
+        if ((!isXNext && player === 'X') || (isXNext && player === 'O')) {
             const bestMove = calculateBestMove(board, opponent)
             if (bestMove !== null) {
                 const newBoard = [...board]
@@ -79,7 +79,7 @@ const GamePage = () => {
 
         if (mode === 'PlayerVSPlayer') {
             newBoard[index] = isXNext ? 'X' : 'O'
-        } else if (mode === 'PlayerVSCPU' && ((isXNext && firstPlayer === 'X') || (!isXNext && firstPlayer === 'O'))) {
+        } else if (mode === 'PlayerVSCPU' && ((isXNext && player === 'X') || (!isXNext && player === 'O'))) {
             newBoard[index] = player
         }
 
@@ -89,6 +89,7 @@ const GamePage = () => {
 
     const handleReset = (): void => {
         setBoard(Array(9).fill(null))
+        setIsShow(false)
         setIsXNext(true)
     }
 
@@ -96,29 +97,33 @@ const GamePage = () => {
         <div className="game">
             <ResultRound
                 isOpen={isShow}
-                onClose={() => setIsShow(false)}
+                onClose={() => stopGame()}
                 onReset={handleReset}
                 whoWins={
                     winner == 'DRAW' ? winner :
                         mode == 'PlayerVSCPU' ?
-                            (firstPlayer == winner ? 'you' : 'cpu') :
-                            (firstPlayer == winner ? 'first' : 'second')
+                            (player == winner ? 'you' : 'cpu') :
+                            (player == winner ? 'first' : 'second')
                 }
                 winnersIcon={
                     winner == 'DRAW' ? null :
-                        firstPlayer == winner ?  winner: getOpponent(player)
+                        player == winner ? winner : getOpponent(player)
                 }
             />
 
             <div className="board">
-                <GroupIcons />
+                <GroupIcons/>
 
                 <div className={'turn'}>
-                    {isXNext ? <XIcon /> : <OIcon />} TURN
+                    {isXNext ? <XIcon/> : <OIcon/>} TURN
                 </div>
 
-                <button onClick={handleReset} className="reset">
-                    <ResetIcon />
+                <button
+                    aria-label="Reset option"
+                    onClick={handleReset}
+                    className="reset"
+                >
+                    <ResetIcon/>
                 </button>
 
                 {board.map((value, index) => (

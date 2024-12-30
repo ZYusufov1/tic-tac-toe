@@ -1,4 +1,4 @@
-import { Player } from '../gamePage/GamePage.tsx'
+import { Player } from '../../App.tsx'
 
 export const calculateBestMove = (board: Player[], cpu: Player): number | null => {
     const lines: number[][] = [

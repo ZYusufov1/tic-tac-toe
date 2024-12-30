@@ -7,19 +7,26 @@ import OIcon from './../../images/o.svg?react'
 import { useState } from 'react'
 import classNames from 'classnames'
 import GroupIcons from '../../components/groupIcons/GroupIcons.tsx'
-import { useNavigate } from 'react-router-dom'
+import { Player } from '../../App.tsx'
 
-const MainPage = () => {
-    const [way, setWay] = useState('X')
-    const navigate = useNavigate()    
-    
-    const handleNavigation = (mode: string, player: string) => {
-        navigate(`/game?mode=${mode}&player=${player}`)
+interface MainPageProps {
+    setMode: (value: string) => void,
+    setPlayer: (value: Player) => void,
+    startGame: () => void
+}
+
+const MainPage = ({ setMode, setPlayer, startGame }: MainPageProps) => {
+    const [way, setWay] = useState<Player>('X')
+
+    const handleStartGame = (mode: string, player: Player) => {
+        setPlayer(player)
+        setMode(mode)
+        startGame()
     }
-    
+
     return (
         <div className={'mainPage'}>
-            <GroupIcons />
+            <GroupIcons/>
 
             <div className={'blockChoose'}>
                 <div className={'title'}>
@@ -28,21 +35,23 @@ const MainPage = () => {
 
                 <div className={'buttonsChoose'}>
                     <button
-                        className={classNames('button' , {
+                        aria-label="Chose X option"
+                        className={classNames('button', {
                             'buttonChose': way == 'X'
                         })}
                         onClick={() => setWay('X')}
                     >
-                        <XIcon />
+                        <XIcon/>
                     </button>
 
                     <button
-                        className={classNames('button' , {
+                        aria-label="Chose O option"
+                        className={classNames('button', {
                             'buttonChose': way == 'O'
                         })}
                         onClick={() => setWay('O')}
                     >
-                        <OIcon />
+                        <OIcon/>
                     </button>
                 </div>
 
@@ -53,17 +62,19 @@ const MainPage = () => {
 
             <div className={'modeButtons'}>
                 <button
+                    aria-label="CPU option"
                     className={classNames('buttonMode', 'yellow', 'buttonText')}
-                    onClick={() => handleNavigation('PlayerVSCPU', way)}
+                    onClick={() => handleStartGame('PlayerVSCPU', way)}
                 >
                     NEW GAME (VS CPU)
                 </button>
 
                 <button
+                    aria-label="Player option"
                     className={classNames('buttonMode', 'lime', 'buttonText')}
-                    onClick={() => handleNavigation('PlayerVSPlayer', way)}
+                    onClick={() => handleStartGame('PlayerVSPlayer', way)}
                 >
-                    NEW GAME  (VS PLAYER)
+                    NEW GAME (VS PLAYER)
                 </button>
             </div>
         </div>
