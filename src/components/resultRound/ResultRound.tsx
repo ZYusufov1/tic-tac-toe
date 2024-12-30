@@ -6,7 +6,6 @@ import XIcon from './../../images/x.svg?react'
 import OIcon from './../../images/o.svg?react'
 import classNames from 'classnames'
 import { FC, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 interface ResultRoundProps {
     isOpen: boolean;
@@ -51,17 +50,14 @@ const ResultMessage: FC<{ whoWins: string; winnersIcon?: 'X' | 'O' | null }> = (
 
 const ResultRound: FC<ResultRoundProps> = ({ isOpen, onClose, onReset, whoWins, winnersIcon }) => {
     const [isShow, setIsShow] = useState(false)
-    const navigate = useNavigate()
 
     const handleQuit = () => {
         onClose()
-        navigate('/')
     }
 
     const handleReset = () => {
-        setIsShow(false)
-        onClose()
         onReset()
+        setIsShow(false)
     }
 
     return (

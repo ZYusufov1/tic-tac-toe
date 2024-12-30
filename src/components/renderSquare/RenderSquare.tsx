@@ -7,7 +7,7 @@ import OIcon from './../../images/o.svg?react'
 import XEmptyIcon from './../../images/xEmpty.svg?react'
 // @ts-ignore
 import OEmptyIcon from './../../images/oEmpty.svg?react'
-import { Player } from '../../pages/gamePage/GamePage.tsx'
+import { Player } from '../../App.tsx'
 import './RenderSquare.css'
 
 type SquareProps = {
