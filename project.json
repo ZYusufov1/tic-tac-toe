@@ -1,4 +1,5 @@
 {
   "label": "Tic tac toe",
+  "type": "Game",
   "preview": "preview.png"
 }
