@@ -1,5 +1,6 @@
 {
   "label": "Tic tac toe",
+  "description": "Tic Tac Toe is a timeless strategy game designed for two players or one player against a CPU opponent. Played on a simple 3x3 grid, the game challenges players to outthink their opponent to achieve victory. Whether competing against a friend or testing your skills against the CPU, Tic Tac Toe offers engaging and strategic gameplay.",
   "type": "Game",
   "preview": "preview.png"
 }
